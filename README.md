@@ -72,14 +72,13 @@ solana-keygen grind --starts-with MVSR:1
 cd workdir
 git clone https://github.com/mean-dao/voter-stake-registry.git
 cd workdir/voter-stake-registry
-git fetch --all --tags
-git checkout tags/release-v0.2.4
+git checkout master
 ```
 
 ### Build the voter-stake-registry program
 ```bash
 cd workdir/voter-stake-registry
-cargo build-bpf
+anchor build
 ```
 
 ### Deploy the voter-stake-registry program
@@ -102,6 +101,14 @@ solana program set-upgrade-authority MVSRXSGsDxcmKWMFQyufxJh3NWmpmgZmT9YHTr4MioB
         --new-upgrade-authority DxtAsWiebDtfFXmJSiMnmKrJi5RLLPReE6QUVtJHiiFJ
 ```
 
+### Upgrade voter-stake-registry program (write buffer + upgrade from Supersafe UI)
+```bash
+solana program write-buffer ./voter-stake-registry/target/deploy/voter_stake_registry.so\
+        --url localhost
+solana program set-buffer-authority BUFFER_ADDRESS\
+        --new-buffer-authority DxtAsWiebDtfFXmJSiMnmKrJi5RLLPReE6QUVtJHiiFJ\
+        --url localhost
+```
 
 ## References
  - https://github.com/solana-labs/solana-program-library/tree/master/governance
