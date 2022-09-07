@@ -26,7 +26,7 @@ solana-keygen grind --starts-with MGov:1
 ### Clone spl-governance and git checkout to the latest release commit
 ```bash
 cd workdir
-git clone https://github.com/solana-labs/solana-program-library.git
+git clone https://github.com/mean-dao/solana-program-library.git
 cd workdir/solana-program-library
 git fetch --all --tags
 git checkout tags/governance-v2.2.6
@@ -52,7 +52,12 @@ solana program deploy\
 ```
 
 ### Transfer upgrade authority to DAO multisig
-
+```bash
+solana program set-upgrade-authority MGovW65tDhMMcpEmsegpsdgvzb6zUwGsNjhXFxRAnjd\
+        --url localhost\
+        --upgrade-authority ./localnet/localnet-upgrade-authority.json\
+        --new-upgrade-authority DxtAsWiebDtfFXmJSiMnmKrJi5RLLPReE6QUVtJHiiFJ
+```
 
 ## Deploy our own Mean instance of the voter-stake-registry program
 
@@ -60,6 +65,41 @@ solana program deploy\
 ```bash
 cd workdir/localnet
 solana-keygen grind --starts-with MVSR:1
+```
+
+### Clone voter-stake-registry and git checkout to the latest release commit
+```bash
+cd workdir
+git clone https://github.com/mean-dao/voter-stake-registry.git
+cd workdir/voter-stake-registry
+git fetch --all --tags
+git checkout tags/release-v0.2.4
+```
+
+### Build the voter-stake-registry program
+```bash
+cd workdir/voter-stake-registry
+cargo build-bpf
+```
+
+### Deploy the voter-stake-registry program
+
+```bash
+cd workdir
+solana program deploy\
+        --url localhost\
+        --program-id ./localnet/MVSRXSGsDxcmKWMFQyufxJh3NWmpmgZmT9YHTr4MioB.json\
+        --upgrade-authority ./localnet/localnet-upgrade-authority.json\
+        --verbose\
+        ./voter-stake-registry/target/deploy/voter_stake_registry.so
+```
+
+### Transfer upgrade authority to DAO multisig
+```bash
+solana program set-upgrade-authority MVSRXSGsDxcmKWMFQyufxJh3NWmpmgZmT9YHTr4MioB\
+        --url localhost\
+        --upgrade-authority ./localnet/localnet-upgrade-authority.json\
+        --new-upgrade-authority DxtAsWiebDtfFXmJSiMnmKrJi5RLLPReE6QUVtJHiiFJ
 ```
 
 
