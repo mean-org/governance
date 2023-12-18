@@ -100,6 +100,8 @@ solana program set-upgrade-authority MVSRXSGsDxcmKWMFQyufxJh3NWmpmgZmT9YHTr4MioB
         --upgrade-authority ./localnet/localnet-upgrade-authority.json\
         --new-upgrade-authority DxtAsWiebDtfFXmJSiMnmKrJi5RLLPReE6QUVtJHiiFJ
 ```
+Actual gov gov upgrade authority (Mean DAO Multisig): E4zKMnJC6E7p7izgynpKXubJiXeDNvohjVunbTgxN6jh
+
 
 ### Upgrade voter-stake-registry program (write buffer + upgrade from Supersafe UI)
 ```bash
